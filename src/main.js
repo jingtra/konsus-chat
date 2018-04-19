@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import createStore from './store/createStore'
 import './styles/main.scss'
+import App from "./components/App";
 
 // Store Initialization
 // ------------------------------------
@@ -12,11 +13,9 @@ const store = createStore(window.__INITIAL_STATE__)
 const MOUNT_NODE = document.getElementById('root')
 
 let render = () => {
-  const App = require('./components/App').default
-  const routes = require('./routes/index').default(store)
 
   ReactDOM.render(
-    <App store={store} routes={routes} />,
+    <App store={store} />,
     MOUNT_NODE
   )
 }
@@ -44,7 +43,6 @@ if (__DEV__) {
     // Setup hot module replacement
     module.hot.accept([
       './components/App',
-      './routes/index',
     ], () =>
       setImmediate(() => {
         ReactDOM.unmountComponentAtNode(MOUNT_NODE)
